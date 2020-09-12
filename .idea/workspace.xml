@@ -35,6 +35,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
   <component name="GOROOT" path="$USER_HOME$/sdk/go1.15" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/github.com/PuerkitoBio/goquery" />
@@ -55,6 +62,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
@@ -67,7 +75,15 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build produce.go">
+    <configuration name="go build consumer.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProjsctcopy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/src/consumer/consumer.go" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build produce.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="awesomeProjsctcopy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -79,6 +95,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Build.go build produce.go" />
+        <item itemvalue="Go Build.go build consumer.go" />
       </list>
     </recent_temporary>
   </component>
@@ -98,6 +115,22 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state width="1398" height="214" key="GridCell.Tab.0.bottom" timestamp="1599885118745">
+      <screen x="0" y="23" width="1440" height="830" />
+    </state>
+    <state width="1398" height="214" key="GridCell.Tab.0.bottom/0.23.1440.830@0.23.1440.830" timestamp="1599885118745" />
+    <state width="1398" height="214" key="GridCell.Tab.0.center" timestamp="1599885118744">
+      <screen x="0" y="23" width="1440" height="830" />
+    </state>
+    <state width="1398" height="214" key="GridCell.Tab.0.center/0.23.1440.830@0.23.1440.830" timestamp="1599885118744" />
+    <state width="1398" height="214" key="GridCell.Tab.0.left" timestamp="1599885118743">
+      <screen x="0" y="23" width="1440" height="830" />
+    </state>
+    <state width="1398" height="214" key="GridCell.Tab.0.left/0.23.1440.830@0.23.1440.830" timestamp="1599885118743" />
+    <state width="1398" height="214" key="GridCell.Tab.0.right" timestamp="1599885118744">
+      <screen x="0" y="23" width="1440" height="830" />
+    </state>
+    <state width="1398" height="214" key="GridCell.Tab.0.right/0.23.1440.830@0.23.1440.830" timestamp="1599885118744" />
     <state x="221" y="76" key="SettingsEditor" timestamp="1599882184795">
       <screen x="0" y="23" width="1440" height="830" />
     </state>

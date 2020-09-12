@@ -5,19 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/Shopify/sarama"
-	"github.com/vmihailenco/msgpack"
 	"github.com/yanyiwu/gojieba"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
-	"os"
-	"os/signal"
 	"reflect"
-	"strconv"
 	"strings"
-	"time"
 )
 
 
@@ -267,59 +261,60 @@ func main() {
 	//kafka 生产数据
 	broker := "localhost:9092"
 	topic := "message_pack"
-
-	config := sarama.NewConfig()
-	config.Producer.Retry.Max = 5
-	config.Producer.RequiredAcks = sarama.WaitForAll
-	//sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
-	producer, err := sarama.NewAsyncProducer([]string{broker}, config)
-	if err != nil {
-		panic(err)
-	}
-
-	defer func() {
-		if err := producer.Close(); err != nil {
-			panic(err)
-		}
-	}()
-
-	signals := make(chan os.Signal, 1)
-	signal.Notify(signals, os.Interrupt)
-
-	var enqueued, errors int
-	doneCh := make(chan struct{})
-	var data_id int
-	data_id=1
-	go func() {
-		for {
-
-			time.Sleep(1 * time.Second)
-
-			b, err := msgpack.Marshal(&data_res)
-			if err != nil {
-				panic(err)
-			}
-
-			msg := &sarama.ProducerMessage{
-				Topic: topic,
-				Key:   sarama.StringEncoder(strconv.Itoa(data_id)),
-				Value: sarama.StringEncoder(b),
-			}
-			select {
-			case producer.Input() <- msg:
-				enqueued++
-				fmt.Printf("Produce message: %v\n", data_res)
-			case err := <-producer.Errors():
-				errors++
-				fmt.Println("Failed to produce message:", err)
-			case <-signals:
-				doneCh <- struct{}{}
-			}
-		}
-	}()
-
-	<-doneCh
-	log.Printf("Enqueued: %d; errors: %d\n", enqueued, errors)
+	common.Produce(topic, broker, &data_res)
+	//HandleError(err, "kafaka produce")
+	//config := sarama.NewConfig()
+	//config.Producer.Retry.Max = 5
+	//config.Producer.RequiredAcks = sarama.WaitForAll
+	////sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
+	//producer, err := sarama.NewAsyncProducer([]string{broker}, config)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//
+	//defer func() {
+	//	if err := producer.Close(); err != nil {
+	//		panic(err)
+	//	}
+	//}()
+	//
+	//signals := make(chan os.Signal, 1)
+	//signal.Notify(signals, os.Interrupt)
+	//
+	//var enqueued, errors int
+	//doneCh := make(chan struct{})
+	//var data_id int
+	//data_id=1
+	//go func() {
+	//	for {
+	//
+	//		time.Sleep(1 * time.Second)
+	//
+	//		b, err := msgpack.Marshal(&data_res)
+	//		if err != nil {
+	//			panic(err)
+	//		}
+	//
+	//		msg := &sarama.ProducerMessage{
+	//			Topic: topic,
+	//			Key:   sarama.StringEncoder(strconv.Itoa(data_id)),
+	//			Value: sarama.StringEncoder(b),
+	//		}
+	//		select {
+	//		case producer.Input() <- msg:
+	//			enqueued++
+	//			fmt.Printf("Produce message: %v\n", data_res)
+	//		case err := <-producer.Errors():
+	//			errors++
+	//			fmt.Println("Failed to produce message:", err)
+	//		case <-signals:
+	//			doneCh <- struct{}{}
+	//		}
+	//	}
+	//}()
+	//
+	//<-doneCh
+	//log.Printf("Enqueued: %d; errors: %d\n", enqueued, errors)
 
 
 

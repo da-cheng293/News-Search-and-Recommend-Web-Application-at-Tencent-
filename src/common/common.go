@@ -8,3 +8,7 @@ type Modify_data struct {
 	Types              []string `json:"Types"`
 
 }
+
+type Consumer struct {
+	ready chan bool
+}
