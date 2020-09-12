@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Go Experimental Search Engine</title>
+
+    <!-- Bootstrap 4.1 CSS import -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- jQuery and Bootstrap 4.1 JS imports -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <style>
+        #searchInputText {
+            width: 80%;
+        }
+
+        #resultsTitle {
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-3">
+    <div class="row mb-3">
+        <div class="col text-center">
+            <h1>News Search Engine</h1>
+        </div>
+    </div>
+    <!-- Search Form -->
+    <div class="row justify-content-center mb-3">
+        <div class="col-6 mb-3">
+            <form action="/search" class="form-inline" id="searchForm">
+                <label class="sr-only" for="searchInputText">Search</label>
+                <input type="text" name="input" class="form-control mb-2 mr-sm-2" id="searchInputText" placeholder="What are you looking for?">
+                <button type="submit" class="btn btn-primary mb-2">Search</button>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <p class="mb-0" id="resultsTitle">Come on, give a chance to this amazing search engine!</p>
+        </div>
+    </div>
+
+    <!-- Results -->
+    <div class="container" id="results">
+        <!-- All search results will be appnded here -->
+    </div>
+</div>
+
+<!-- JavaScript Handler to submit form -->
+<script>
+    $(document).ready(function() {
+        function parseResponse(resultsContainer, data) {
+            console.log(data);
+            const resultsAmount = data.pages.length
+            $(resultsContainer).html('');
+
+            if (resultsAmount > 0) {
+                $.each(data.pages, function(index, page) {
+                    appendToResults(resultsContainer, page)
+                    setResultsTitle(resultsAmount + " results found it for: " + data.input, 'green')
+                });
+            } else {
+                setResultsTitle("I'm sorry, I couldn't find something relevant for your search, please try again with a new term", 'red')
+            }
+        }
+
+        function appendToResults(resultsContainer, page) {
+            $(resultsContainer).append(
+                '<div class="row"><div class="col-12"><h4 class="mb-0">' + page.title +
+                '</h4><a href="' + page.url + '">'  + page.url + '</a><p class="mb-0">'
+                + page.body + '</p></div></div><hr>'
+            );
+        }
+
+        function setResultsTitle(title, color) {
+            $("#resultsTitle").text(title);
+            $("#resultsTitle").css('color', color);
+        }
+
+        $('#searchForm').submit(function(event) {
+            event.preventDefault();
+
+            const input = $(this).find('#searchInputText').val();
+
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: '/search?input=' + input,
+                success: function(data) {
+                    parseResponse("#results", data);
+                },
+                error: function (error) {
+                    setResultsTitle("There was an error with your search: " + error + ", please try it again!", 'red')
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

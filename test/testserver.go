@@ -1,7 +1,10 @@
+
 package main
 
 import (
-	"common"
+	"fmt"
+	"log"
+	"net/http"
 )
 
 //type common.Modify_data struct {
@@ -44,15 +47,47 @@ type Consumer struct {
 //
 //	return nil
 //}
+func helloHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/hello" {
+		http.Error(w, "404 not found.", http.StatusNotFound)
+		return
+	}
 
+	if r.Method != "GET" {
+		http.Error(w, "Method is not supported.", http.StatusNotFound)
+		return
+	}
+
+
+	fmt.Fprintf(w, "Hello!")
+}
 func main() {
-//kafaka 消费数据
-	broker := "localhost:9092"
-	group := "1"
-	var topics []string
-	topics=append(topics, "message_pack")
+	//kafaka 消费数据
+	go func() {
+		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+			if r.Method != "GET" {
+				w.WriteHeader(http.StatusMethodNotAllowed)
+				fmt.Fprintf(w, `405`)
+				return
+			}
+			fmt.Fprintf(w, `pong`)
+		})
+		http.ListenAndServe("localhost:8082", nil)
+	}()
 
-	common.Consumer_pro(broker, group, topics)
+	http.HandleFunc("/statinfo", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "GET" {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			fmt.Fprintf(w, `405`)
+			return
+		}
+		//laklahalfhajfkalgdhf
+		fmt.Fprintf(w, "op")
+	})
+	http.ListenAndServe("localhost:8081", nil)
+
+
+	//common.Consumer_pro(broker, group, topics)
 	//http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
 	//	if r.Method != "GET" {
 	//		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -80,10 +115,14 @@ func main() {
 
 
 	//func main() {
-	//http.HandleFunc("/hello", helloHandler) // Update this line of code
+	http.HandleFunc("/hello", helloHandler) // Update this line of code
 
 
-
+	fmt.Printf("Starting server at port 8080\n")
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("ok")
 	//}
 	//version, err := sarama.ParseKafkaVersion("2.3.0")
 	//if err != nil {

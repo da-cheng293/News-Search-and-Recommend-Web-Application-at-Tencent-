@@ -44,7 +44,7 @@
   </component>
   <component name="GOROOT" path="$USER_HOME$/sdk/go1.15" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/github.com/PuerkitoBio/goquery" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/github.com/olivere/elastic" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -75,7 +75,14 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoLibrariesConfigurableProvider" />
   </component>
-  <component name="RunManager" selected="Go Build.go build produce.go">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/webServer" />
+      <recent name="$PROJECT_DIR$/src/common" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build serverMethod.go">
     <configuration name="go build consumer.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="awesomeProjsctcopy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -92,10 +99,28 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build serverMethod.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProjsctcopy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/src/webServer/serverMethod.go" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build testserver.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProjsctcopy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/test/testserver.go" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build produce.go" />
+        <item itemvalue="Go Build.go build serverMethod.go" />
         <item itemvalue="Go Build.go build consumer.go" />
+        <item itemvalue="Go Build.go build produce.go" />
+        <item itemvalue="Go Build.go build testserver.go" />
       </list>
     </recent_temporary>
   </component>
@@ -115,25 +140,29 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="214" key="GridCell.Tab.0.bottom" timestamp="1599885118745">
+    <state x="437" y="264" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599935958432">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1398" height="214" key="GridCell.Tab.0.bottom/0.23.1440.830@0.23.1440.830" timestamp="1599885118745" />
-    <state width="1398" height="214" key="GridCell.Tab.0.center" timestamp="1599885118744">
+    <state x="437" y="264" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.830@0.23.1440.830" timestamp="1599935958432" />
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom" timestamp="1599950682525">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1398" height="214" key="GridCell.Tab.0.center/0.23.1440.830@0.23.1440.830" timestamp="1599885118744" />
-    <state width="1398" height="214" key="GridCell.Tab.0.left" timestamp="1599885118743">
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.23.1440.830@0.23.1440.830" timestamp="1599950682525" />
+    <state width="1398" height="213" key="GridCell.Tab.0.center" timestamp="1599950682524">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1398" height="214" key="GridCell.Tab.0.left/0.23.1440.830@0.23.1440.830" timestamp="1599885118743" />
-    <state width="1398" height="214" key="GridCell.Tab.0.right" timestamp="1599885118744">
+    <state width="1398" height="213" key="GridCell.Tab.0.center/0.23.1440.830@0.23.1440.830" timestamp="1599950682524" />
+    <state width="1398" height="213" key="GridCell.Tab.0.left" timestamp="1599950682524">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state width="1398" height="214" key="GridCell.Tab.0.right/0.23.1440.830@0.23.1440.830" timestamp="1599885118744" />
-    <state x="221" y="76" key="SettingsEditor" timestamp="1599882184795">
+    <state width="1398" height="213" key="GridCell.Tab.0.left/0.23.1440.830@0.23.1440.830" timestamp="1599950682524" />
+    <state width="1398" height="213" key="GridCell.Tab.0.right" timestamp="1599950682525">
       <screen x="0" y="23" width="1440" height="830" />
     </state>
-    <state x="221" y="76" key="SettingsEditor/0.23.1440.830@0.23.1440.830" timestamp="1599882184795" />
+    <state width="1398" height="213" key="GridCell.Tab.0.right/0.23.1440.830@0.23.1440.830" timestamp="1599950682525" />
+    <state x="221" y="76" key="SettingsEditor" timestamp="1599940810031">
+      <screen x="0" y="23" width="1440" height="830" />
+    </state>
+    <state x="221" y="76" key="SettingsEditor/0.23.1440.830@0.23.1440.830" timestamp="1599940810031" />
   </component>
 </project>

@@ -32,6 +32,9 @@ const mapping = `
             "Body": {
 				"type": "text"
 			},
+			"Url_News": {
+				"type": "text"
+			},
 			"Types": {
 				"type": "text"
 			}
@@ -206,6 +209,7 @@ func Get_datares(data *[]common.Modify_data, sub_title string, sub_time string, 
 	single_data_res.ID=sub_id
 	single_data_res.Title=sub_title
 	single_data_res.Timestamp=sub_time
+	single_data_res.Url_News=sub_url
 	//定制爬取程序
 	url_map := map[string] fn {
 		"k.sina.com.cn": sina_deal,
@@ -257,11 +261,39 @@ func main() {
 	for j :=0; j<len(data_res);j++{
 		fmt.Println(data_res[j])
 	}
-
+	dataCount :=10
 	//kafka 生产数据
 	broker := "localhost:9092"
 	topic := "message_pack"
-	common.Produce(topic, broker, &data_res)
+	go func() {
+		http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+			if r.Method != "GET" {
+				w.WriteHeader(http.StatusMethodNotAllowed)
+				fmt.Fprintf(w, `405`)
+				return
+			}
+			fmt.Fprintf(w, `producer is running`)
+		})
+		http.ListenAndServe("localhost:8082", nil)
+	}()
+	go func() {
+		common.Produce(topic, broker, &data_res)
+	}()
+
+	http.HandleFunc("/statstic", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "GET" {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			fmt.Fprintf(w, `405`)
+			return
+		}
+		//laklahalfhajfkalgdhf
+		fmt.Fprintf(w, "%d", dataCount )
+	})
+
+	http.ListenAndServe("localhost:8081", nil)
+
+
+
 	//HandleError(err, "kafaka produce")
 	//config := sarama.NewConfig()
 	//config.Producer.Retry.Max = 5
