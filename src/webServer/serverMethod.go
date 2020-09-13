@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -10,15 +11,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Page struct to store in database
-//type Page struct {
-//		ID                  int            `json:"id"`
-//		Timestamp           string `json:"Timestamp"`
-//		Source				string `json:"Source"`
-//		Title               string `json:"title"`
-//		Body                string `json:"body"`
-//		Types              []string `json:"Types"`
-//}
+
 
 // SearchResult struct to handle search queries
 type SearchResult struct {
@@ -31,11 +24,31 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Print("Template parsing error: ", err)
 	}
-
+	if r.Method == "POST" {
+		ajax_post_data := r.FormValue("ajax_post_data")
+		fmt.Println("Receive ajax post data string ", ajax_post_data)
+		w.Write([]byte("<h2>after<h2>"))
+	}
 	err = t.Execute(w, nil)
 	if err != nil {
 		log.Print("Template executing error: ", err)
 	}
+	//result_sin :=common.ReadEs()
+	//
+	//jsonData, err := json.Marshal(result_sin)
+	//if err != nil {
+	//	log.
+	//		Print("JSON executing error: ", err)
+	//	return
+	//}
+	//
+	//w.Header().Set("Content-Type", "application/json")
+	//w.Write(jsonData)
+	////if r.Method == "POST" {
+	////	ajax_post_data := r.FormValue("ajax_post_data")
+	////	fmt.Println("Receive ajax post data string ", ajax_post_data)
+	////	w.Write([]byte("<h2>after<h2>"))
+	////}
 }
 
 func searchHandler(w http.ResponseWriter, r *http.Request) {

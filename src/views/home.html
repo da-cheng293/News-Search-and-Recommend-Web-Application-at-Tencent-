@@ -40,7 +40,7 @@
             </form>
         </div>
         <div class="col-md-12">
-            <p class="mb-0" id="resultsTitle">Come on, give a chance to this amazing search engine!</p>
+            <p class="mb-0" id="resultsTitle">I feel good now!</p>
         </div>
     </div>
 
@@ -48,7 +48,7 @@
     <div class="container" id="results">
         <!-- All search results will be appnded here -->
     </div>
-</div>
+
 
 <!-- JavaScript Handler to submit form -->
 <script>
@@ -67,7 +67,9 @@
                 setResultsTitle("I'm sorry, I couldn't find something relevant for your search, please try again with a new term", 'red')
             }
         }
-
+        function test(data){
+            console.log("op"+data);
+        }
         function appendToResults(resultsContainer, page) {
             $(resultsContainer).append(
                 '<div class="row"><div class="col-12"><h4 class="mb-0">' + page.title +
@@ -90,15 +92,22 @@
                 type: 'GET',
                 dataType: "json",
                 url: '/search?input=' + input,
+                async:false,
                 success: function(data) {
                     parseResponse("#results", data);
                 },
                 error: function (error) {
                     setResultsTitle("There was an error with your search: " + error + ", please try it again!", 'red')
                 }
+
             });
         });
+
+
     });
+
+
+
 </script>
 </body>
 </html>

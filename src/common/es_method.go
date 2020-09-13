@@ -13,33 +13,7 @@ import (
 
 )
 
-//const (
-//	indexName    = "pages"
-//	indexMapping = `{
-//		"settings":{
-//			"number_of_shards":1,
-//			"number_of_replicas":0
-//		},
-//		"mappings":{
-//			"page":{
-//				"properties":{
-//					"title": {
-//						"type":"text"
-//					},
-//					"description": {
-//						"type":"text"
-//					},
-//					"body": {
-//						"type":"text"
-//					},
-//					"url": {
-//						"type":"text"
-//					}
-//				}
-//			}
-//		}
-//	}`
-//)
+
 
 var client *elastic.Client
 
@@ -132,7 +106,7 @@ func SearchContent(input string) []Modify_data {
 	return pages
 }
 
-func readEs()Modify_data{
+func ReadEs()Modify_data{
 	var subject Modify_data
 	ctx := context.Background()
 	result, err := client.Get().
@@ -143,13 +117,12 @@ func readEs()Modify_data{
 		panic(err)
 	}
 	if result.Found {
-		//fmt.Printf("Got document %v (version=%d, index=%s, type=%s)\n",
-		//	result.Id, result.Version, result.Index, result.Type)
+
 		err := json.Unmarshal(result.Source, &subject)
 		if err != nil {
 			panic(err)
 		}
-		//fmt.Println(subject.ID, subject.Title, subject.Genres)
+		
 
 	}
 	return subject
